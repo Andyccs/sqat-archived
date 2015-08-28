@@ -12,6 +12,17 @@ import entities.SQATEntity;
 
 public class AnalyzeClassElement extends BaseClass {
 
+    private CompilationUnitTree compilationUnitTree;
+    private SourcePositions sourcePositions;
+    private LineMap lineMap;
+    private String fileName;
+
+    private String className;
+    private String methodName;
+
+    public static int numberOfClasses = 0;
+    public static int numberOfMethods = 0;
+
     AnalyzeClassElement(CompilationUnitTree compilationUnitTree, SourcePositions sourcePositions, File fileName) {
         this.compilationUnitTree = compilationUnitTree;
         this.sourcePositions = sourcePositions;
@@ -19,57 +30,42 @@ public class AnalyzeClassElement extends BaseClass {
         this.fileName = fileName.toString();
     }
 
-    SQATEntity classEntity = new SQATEntity();
-    private CompilationUnitTree compilationUnitTree;
-    private SourcePositions sourcePositions;
-    private LineMap lineMap;
-
-    private String fileName;
-
-    String className = "";
-    String methodName = "";
-    String classVariableName = "";
-    String methodVariabaleName = "";
-    int methodLineOfCode = 0;
-
-    public static int numberOfClasses = 0;
-    public static int numberOfMethods = 0;
-
-    // Get Class Names
     @Override
     public Void visitClass(ClassTree classTree, Void p) {
-        classEntity = new SQATEntity();
         className = classTree.getSimpleName().toString();
-        classEntity.setClassName(className);
 
         long startPosition = sourcePositions.getStartPosition(compilationUnitTree, classTree);
         long startLine = lineMap.getLineNumber(startPosition);
+
         long endPosition = sourcePositions.getEndPosition(compilationUnitTree, classTree);
         long endLine = lineMap.getLineNumber(endPosition);
-        // System.out.println(" Lines  " + endLine  + "  " + "  --- "  + startLine);
+
+        // TODO(andyccs: change method line of code to long
+        SQATEntity classEntity = new SQATEntity();
+        classEntity.setClassName(className);
         classEntity.setMethodLineOfCode((int) (endLine - startLine));
 
         numberOfClasses++;
 
         analizeList.add(classEntity);
+
         return super.visitClass(classTree, p);
     }
 
-    // Get Methods
     @Override
     public Void visitMethod(MethodTree methodTree, Void p) {
         methodName = methodTree.getName().toString();
 
         long startPosition = sourcePositions.getStartPosition(compilationUnitTree, methodTree);
         long startLine = lineMap.getLineNumber(startPosition);
+
         long endPosition = sourcePositions.getEndPosition(compilationUnitTree, methodTree);
         long endLine = lineMap.getLineNumber(endPosition);
 
-        classEntity = new SQATEntity();
+        SQATEntity classEntity = new SQATEntity();
         classEntity.setClassName(className);
         classEntity.setMethodName(methodName);
         classEntity.setMethodLineOfCode((int) (endLine - startLine));
-        // System.out.println(" Lines  " + endLine  + "  " + "  --- "  + startLine);
 
         numberOfMethods++;
 
