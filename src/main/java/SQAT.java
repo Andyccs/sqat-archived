@@ -11,7 +11,7 @@ public class SQAT {
 
     public static void main(String[] args) {
 
-        String path = "/Users/andyccs/Desktop/SQAT/src/main/java";
+        String path = "/Users/andyccs/Documents/sqat/src/main/java";
         final File folder = new File(path);
         listFilesForFolder(folder);
 
