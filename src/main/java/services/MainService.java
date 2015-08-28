@@ -20,9 +20,8 @@ public class MainService {
     List<File> fileList = new ArrayList<File>();
     List<String> classNames = new ArrayList<String>();
 
-    public void AnalizeJavaSourceCode(List<String> filePathList) {
+    public void AnalyzeJavaSourceCode(List<String> filePathList) {
         GetFileList(filePathList);
-        // PrintResults();
         System.out.println("");
         for (SQATEntity entity : BaseClass.analizeList) {
             if (!entity.getMethodName().equals("")) {
@@ -52,14 +51,14 @@ public class MainService {
 
         for (File file : fileList) {
             try {
-                AnalizeFiles(file);
+                AnalyzeFiles(file);
             } catch (Exception ex) {
-                System.out.println("File Analize Failed ");
+                System.out.println("File Analyze Failed ");
             }
         }
     }
 
-    public void AnalizeFiles(File javaSourceFile) throws Exception {
+    public void AnalyzeFiles(File javaSourceFile) throws Exception {
         try {
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -90,18 +89,5 @@ public class MainService {
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
-
     }
-
-    private void PrintResults() {
-
-        for (SQATEntity entity : BaseClass.analizeList) {
-            System.out.println(" Class Name - " + entity.getClassName());
-            System.out.println(" Method Name - " + entity.getMethodName());
-            //  System.out.println( " Method Name - " + entity.getMethodLineOfCode());
-            System.out.println(" ---------------------------------- ");
-        }
-
-    }
-
 }

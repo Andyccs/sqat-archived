@@ -17,7 +17,7 @@ public class SQAT {
 
         MainService mainService = new MainService();
 
-        mainService.AnalizeJavaSourceCode(filePathList);
+        mainService.AnalyzeJavaSourceCode(filePathList);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder = stringBuilder
                 .append("Total number of Classes : ")

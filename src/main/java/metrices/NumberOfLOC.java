@@ -10,18 +10,17 @@ import services.BaseClass;
 
 public class NumberOfLOC extends BaseClass {
 
-    public int numberOfLines = 0;
-    public int numberOfLocMethods = 0;
-    public int numberOfBlankLines = 0;
+    public int numberOfLines;
+    public int numberOfLocMethods;
+    public int numberOfBlankLines;
 
-    //To display in UI as a summary
-    public static int totalLoC = 0;
-    public static int totalBlankLines = 0;
-    public static int totalCommentLines = 0;
-    public static int totalLines = 0;
+    // To display in UI as a summary
+    public static int totalLoC;
+    public static int totalBlankLines;
+    public static int totalCommentLines;
+    public static int totalLines;
 
     public void getLoC(String fileName, long startLine, long endLine) throws IOException {
-
         try {
             try (FileReader fileReader = new FileReader(new File(fileName));
                  BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -40,6 +39,7 @@ public class NumberOfLOC extends BaseClass {
                 }
             }
         } catch (IOException e) {
+            // TODO(andyccs): Fill in the blank
         }
 
         int numberOfComments = getCommentLinesMethods(fileName, 0, (int) startLine, (int) endLine);
@@ -54,7 +54,6 @@ public class NumberOfLOC extends BaseClass {
     }
 
     public int getCommentLinesMethods(String fileName, int numberOfComments, int start, int end) throws IOException {
-
         int numberOfBlockCommentLines = 0;
         try {
             try (FileReader fileReader = new FileReader(new File(fileName));
@@ -64,17 +63,17 @@ public class NumberOfLOC extends BaseClass {
 
                 String currentLine;
                 String nextLine;
-                //Couting blank lines inside methods
+                // Couting blank lines inside methods
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
 
                     if ((i >= start) && (i <= end)) {
-                        //Counting Single Line comments
+                        // Counting Single Line comments
                         if (currentLine.trim().startsWith("//")) {
                             numberOfComments++;
                         }
 
-                        //Counting Multi Lines comments
+                        // Counting Multi Lines comments
                         if (currentLine.trim().startsWith("/*")) {
                             numberOfBlockCommentLines++;
 
@@ -92,6 +91,7 @@ public class NumberOfLOC extends BaseClass {
                 }
             }
         } catch (IOException e) {
+            // TODO(andyccs): Fill in the blank
         }
 
         numberOfComments += numberOfBlockCommentLines;
@@ -100,7 +100,6 @@ public class NumberOfLOC extends BaseClass {
 
     // Assuming one class per file
     public int numberOfLocClasses(String fileName, String className) {
-
         int numberOfLocPerClass = 0;
         int totalLinesClasses = 0;
         int blankLinesClasses = 0;
@@ -115,7 +114,7 @@ public class NumberOfLOC extends BaseClass {
                 int i = 0;
                 String currentLine;
 
-                //Couting lines to detect starting position
+                // Couting lines to detect starting position
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
 
@@ -139,7 +138,7 @@ public class NumberOfLOC extends BaseClass {
             totalLinesClasses = (endingLine - startingLine) + 1;
             System.out.println("Total number of source lines of the class " + totalLinesClasses);
 
-            // Couting blank lines in classes
+            // Counting blank lines in classes
             try {
                 try (FileReader fileReader = new FileReader(new File(fileName));
                      BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -147,7 +146,7 @@ public class NumberOfLOC extends BaseClass {
                     int i = 0;
                     String currentLine;
 
-                    //Couting blank lines inside methods
+                    // Counting blank lines inside methods
                     while ((currentLine = bufferedReader.readLine()) != null) {
                         i++;
                         if ((i >= startingLine) && (i <= endingLine) && "".equals(currentLine.trim())) {
@@ -169,9 +168,11 @@ public class NumberOfLOC extends BaseClass {
                 totalLines += totalLinesClasses;
 
             } catch (IOException e) {
+                // TODO(andyccs): Fill in the blank
             }
 
         } catch (IOException e) {
+            // TODO(andyccs): Fill in the blank
         }
 
         return numberOfLocPerClass;

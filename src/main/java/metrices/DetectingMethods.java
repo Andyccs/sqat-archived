@@ -24,11 +24,10 @@ public class DetectingMethods {
 
     private long startPosition = 0;
     private long endPosition = 0;
-    public long startLine = 0;
-    public long endLine = 0;
+    private long startLine = 0;
+    private long endLine = 0;
 
-    public void findSurrondingMethods(String fileName) {
-
+    public void findSurroundingMethods(String fileName) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
@@ -76,12 +75,13 @@ public class DetectingMethods {
 
             // splitting methods to files
             try {
-                //Avoid constructors
+                // Avoid constructors
                 if (!arg0.getName().toString().equalsIgnoreCase("<init>")) {
-                    File file = new File("src\\MethodFiles\\" + arg0.getName() + ".txt");
-                    BufferedWriter output = new BufferedWriter(new FileWriter(file));
-                    output.write(arg0.getBody().toString());
-                    output.close();
+                    // TODO(andyccs): removed
+//                    File file = new File("src\\MethodFiles\\" + arg0.getName() + ".txt");
+//                    BufferedWriter output = new BufferedWriter(new FileWriter(file));
+//                    output.write(arg0.getBody().toString());
+//                    output.close();
 
                     NumberOfLOC numberOfLoc = new NumberOfLOC();
                     numberOfLoc.getLoC(fileName, startLine, endLine);
