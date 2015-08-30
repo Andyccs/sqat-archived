@@ -1,5 +1,6 @@
-package services;
+package com.sqatntu.services;
 
+import com.sqatntu.entities.SQATEntity;
 import com.sun.source.tree.ClassTree;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.LineMap;
@@ -8,20 +9,16 @@ import com.sun.source.util.SourcePositions;
 
 import java.io.File;
 
-import entities.SQATEntity;
-
 public class AnalyzeClassElement extends BaseClass {
 
+    public static int numberOfClasses = 0;
+    public static int numberOfMethods = 0;
     private CompilationUnitTree compilationUnitTree;
     private SourcePositions sourcePositions;
     private LineMap lineMap;
     private String fileName;
-
     private String className;
     private String methodName;
-
-    public static int numberOfClasses = 0;
-    public static int numberOfMethods = 0;
 
     AnalyzeClassElement(CompilationUnitTree compilationUnitTree, SourcePositions sourcePositions, File fileName) {
         this.compilationUnitTree = compilationUnitTree;

@@ -1,5 +1,7 @@
-package services;
+package com.sqatntu.services;
 
+import com.sqatntu.entities.SQATEntity;
+import com.sqatntu.metrices.MetricsCalculator;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.util.SourcePositions;
 import com.sun.source.util.Trees;
@@ -12,9 +14,6 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
-
-import entities.SQATEntity;
-import metrices.MetricsCalculator;
 
 public class MainService {
 

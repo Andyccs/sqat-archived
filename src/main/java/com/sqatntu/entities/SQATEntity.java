@@ -1,4 +1,4 @@
-package entities;
+package com.sqatntu.entities;
 
 import java.io.Serializable;
 
@@ -9,7 +9,6 @@ import javax.persistence.Id;
 
 @Entity
 public class SQATEntity implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
     // variables

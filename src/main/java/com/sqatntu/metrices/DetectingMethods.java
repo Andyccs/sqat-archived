@@ -1,4 +1,4 @@
-package metrices;
+package com.sqatntu.metrices;
 
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.LineMap;

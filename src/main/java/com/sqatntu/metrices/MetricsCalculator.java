@@ -1,4 +1,4 @@
-package metrices;
+package com.sqatntu.metrices;
 
 public class MetricsCalculator {
 

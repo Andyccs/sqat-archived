@@ -1,8 +1,7 @@
-package metrices;
+package com.sqatntu.metrices;
 
+import com.sqatntu.services.BaseClass;
 import com.sun.source.tree.MethodTree;
-
-import services.BaseClass;
 
 public class NumberOfMethods extends BaseClass {
 
