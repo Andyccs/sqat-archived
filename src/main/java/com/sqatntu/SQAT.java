@@ -45,7 +45,7 @@ public class SQAT {
         System.out.println(stringBuilder.toString());
     }
 
-    public static void listFilesForFolder(final File folder) {
+    private static void listFilesForFolder(final File folder) {
         System.out.println("Java source files in the selected folder are : ");
 
         for (final File fileEntry : folder.listFiles()) {

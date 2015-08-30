@@ -3,7 +3,7 @@ package com.sqatntu.metrices;
 import com.sqatntu.services.BaseClass;
 import com.sun.source.tree.MethodTree;
 
-public class NumberOfMethods extends BaseClass {
+class NumberOfMethods extends BaseClass {
 
     @Override
     public Void visitMethod(MethodTree methodTree, Void p) {

@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseClass extends TreeScanner<Void, Void> {
-    public static List<SQATEntity> analyzeList = new ArrayList<SQATEntity>();
+    public static List<SQATEntity> analyzeList = new ArrayList<>();
 }

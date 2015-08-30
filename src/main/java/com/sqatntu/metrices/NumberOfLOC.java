@@ -15,11 +15,11 @@ public class NumberOfLOC extends BaseClass {
     public static int totalBlankLines;
     public static int totalCommentLines;
     public static int totalLines;
-    public int numberOfLines;
-    public int numberOfLocMethods;
-    public int numberOfBlankLines;
+    private int numberOfLines;
+    private int numberOfLocMethods;
+    private int numberOfBlankLines;
 
-    public void getLoC(String fileName, long startLine, long endLine) throws IOException {
+    public void getLoC(String fileName, long startLine, long endLine) {
         try {
             try (FileReader fileReader = new FileReader(new File(fileName));
                  BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -52,7 +52,7 @@ public class NumberOfLOC extends BaseClass {
 
     }
 
-    public int getCommentLinesMethods(String fileName, int numberOfComments, int start, int end) throws IOException {
+    private int getCommentLinesMethods(String fileName, int numberOfComments, int start, int end) {
         int numberOfBlockCommentLines = 0;
         try {
             try (FileReader fileReader = new FileReader(new File(fileName));

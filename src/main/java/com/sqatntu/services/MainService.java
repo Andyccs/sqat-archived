@@ -17,8 +17,8 @@ import javax.tools.ToolProvider;
 
 public class MainService {
 
-    List<File> fileList = new ArrayList<File>();
-    List<String> classNames = new ArrayList<String>();
+    private List<File> fileList = new ArrayList<>();
+    private List<String> classNames = new ArrayList<>();
 
     public void AnalyzeJavaSourceCode(List<String> filePathList) {
         GetFileList(filePathList);
@@ -42,7 +42,7 @@ public class MainService {
 
     }
 
-    public void GetFileList(List<String> filePathList) {
+    private void GetFileList(List<String> filePathList) {
         for (String path : filePathList) {
             File selectedFile = new File(path);
             fileList.add(selectedFile);
@@ -58,7 +58,7 @@ public class MainService {
         }
     }
 
-    public void AnalyzeFiles(File javaSourceFile) throws Exception {
+    private void AnalyzeFiles(File javaSourceFile) {
         try {
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

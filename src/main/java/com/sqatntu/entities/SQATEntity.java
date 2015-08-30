@@ -10,14 +10,13 @@ import javax.persistence.Id;
 @Entity
 public class SQATEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // variables
-    String fileName = "";
-    String className = "";
-    String methodName = "";
-    String classVariableName = "";
-    String methodVariableName = "";
-    long methodLineOfCode;
+    private String fileName = "";
+    private String className = "";
+    private String methodName = "";
+    private String classVariableName = "";
+    private String methodVariableName = "";
+    private long methodLineOfCode;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -47,10 +46,7 @@ public class SQATEntity implements Serializable {
             return false;
         }
         SQATEntity other = (SQATEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !(((this.id == null) && (other.id != null)) || ((this.id != null) && !this.id.equals(other.id)));
     }
 
     @Override

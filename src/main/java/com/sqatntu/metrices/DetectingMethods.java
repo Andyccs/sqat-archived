@@ -17,7 +17,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-public class DetectingMethods {
+class DetectingMethods {
 
     private long startPosition = 0;
     private long endPosition = 0;
@@ -26,7 +26,7 @@ public class DetectingMethods {
 
     public void findSurroundingMethods(String fileName) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
+        DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
         Iterable<? extends JavaFileObject> fileObjects = fileManager.getJavaFileObjects(fileName);
         CompilationTask task = compiler.getTask(null, fileManager, diagnosticsCollector, null, null, fileObjects);
@@ -70,21 +70,11 @@ public class DetectingMethods {
 
             System.out.println("Found the method " + arg0.getName() + " from line " + startLine + " to line " + endLine + ".");
 
-            // splitting methods to files
-            try {
-                // Avoid constructors
-                if (!arg0.getName().toString().equalsIgnoreCase("<init>")) {
-                    // TODO(andyccs): removed
-//                    File file = new File("src\\MethodFiles\\" + arg0.getName() + ".txt");
-//                    BufferedWriter output = new BufferedWriter(new FileWriter(file));
-//                    output.write(arg0.getBody().toString());
-//                    output.close();
-
-                    NumberOfLOC numberOfLoc = new NumberOfLOC();
-                    numberOfLoc.getLoC(fileName, startLine, endLine);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            // Avoid constructors
+            if (!arg0.getName().toString().equalsIgnoreCase("<init>")) {
+                // TODO(andyccs): removed
+                NumberOfLOC numberOfLoc = new NumberOfLOC();
+                numberOfLoc.getLoC(fileName, startLine, endLine);
             }
 
             return super.visitMethod(arg0, arg1);
