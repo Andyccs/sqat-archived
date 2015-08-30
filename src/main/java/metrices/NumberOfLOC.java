@@ -10,15 +10,14 @@ import services.BaseClass;
 
 public class NumberOfLOC extends BaseClass {
 
-    public int numberOfLines;
-    public int numberOfLocMethods;
-    public int numberOfBlankLines;
-
     // To display in UI as a summary
     public static int totalLoC;
     public static int totalBlankLines;
     public static int totalCommentLines;
     public static int totalLines;
+    public int numberOfLines;
+    public int numberOfLocMethods;
+    public int numberOfBlankLines;
 
     public void getLoC(String fileName, long startLine, long endLine) throws IOException {
         try {

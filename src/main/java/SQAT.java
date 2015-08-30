@@ -1,9 +1,10 @@
-import metrices.NumberOfLOC;
-import services.AnalyzeClassElement;
-import services.MainService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import metrices.NumberOfLOC;
+import services.AnalyzeClassElement;
+import services.MainService;
 
 public class SQAT {
 
@@ -59,5 +60,5 @@ public class SQAT {
             }
         }
     }
-    
+
 }

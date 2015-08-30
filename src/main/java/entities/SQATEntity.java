@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +12,19 @@ public class SQATEntity implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
+    // variables
+    String fileName = "";
+    String className = "";
+    String methodName = "";
+    String classVariableName = "";
+    String methodVariableName = "";
+    long methodLineOfCode;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private long methodBlankLines;
+    private long methodTotalLines;
+    private long methodCommentLines;
 
     public Long getId() {
         return id;
@@ -47,17 +58,6 @@ public class SQATEntity implements Serializable {
     public String toString() {
         return "sqat.Entity.SQATEntity[ id=" + id + " ]";
     }
-
-    // variables
-    String fileName = "";
-    String className = "";
-    String methodName = "";
-    String classVariableName = "";
-    String methodVariableName = "";
-    long methodLineOfCode;
-    private long methodBlankLines;
-    private long methodTotalLines;
-    private long methodCommentLines;
 
     public long getMethodLineOfCode() {
         return methodLineOfCode;
