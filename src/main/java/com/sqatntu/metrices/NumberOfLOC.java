@@ -29,7 +29,7 @@ public class NumberOfLOC extends BaseClass {
                 int i = 0;
                 String currentLine;
 
-                //Counting blank lines inside methods
+                // Counting blank lines inside methods
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
                     if ((i >= startLine) && (i <= endLine) && "".equals(currentLine.trim())) {
@@ -126,14 +126,21 @@ public class NumberOfLOC extends BaseClass {
                         j++;
                     }
 
-                    if (tokensArray.length > 1 && (tokensArray[0].equals("class") || tokensArray[1].equals("class"))) {
+                    if (tokensArray.length > 1
+                            && (tokensArray[0].equals("class")
+                            || tokensArray[1].equals("class"))) {
                         startingLine = i;
                     }
                 }
                 endingLine = i;
             }
 
-            System.out.println("Found the class " + className + " from line " + startingLine + " to line " + endingLine);
+            System.out.printf(
+                    "Found the class %s from line %d to line %d. \n",
+                    className,
+                    startingLine,
+                    endingLine);
+
             totalLinesClasses = (endingLine - startingLine) + 1;
             System.out.println("Total number of source lines of the class " + totalLinesClasses);
 
@@ -148,17 +155,26 @@ public class NumberOfLOC extends BaseClass {
                     // Counting blank lines inside methods
                     while ((currentLine = bufferedReader.readLine()) != null) {
                         i++;
-                        if ((i >= startingLine) && (i <= endingLine) && "".equals(currentLine.trim())) {
+                        if ((i >= startingLine)
+                                && (i <= endingLine)
+                                && "".equals(currentLine.trim())) {
                             blankLinesClasses++;
                         }
                     }
                 }
 
                 System.out.println("Total number of blank lines of the class " + blankLinesClasses);
-                totalCommentLinesClasses = getCommentLinesMethods(fileName, 0, startingLine, endingLine);
-                System.out.println("Total number of comment lines of the class " + totalCommentLinesClasses);
-                numberOfLocPerClass = totalLinesClasses - totalCommentLinesClasses - blankLinesClasses;
+
+                totalCommentLinesClasses =
+                        getCommentLinesMethods(fileName, 0, startingLine, endingLine);
+                System.out.println(
+                        "Total number of comment lines of the class "
+                        + totalCommentLinesClasses);
+
+                numberOfLocPerClass =
+                        totalLinesClasses - totalCommentLinesClasses - blankLinesClasses;
                 System.out.println("Total number of Lines of Codes " + numberOfLocPerClass);
+
                 System.out.println("----------------------------------------------------------");
 
                 totalLoC += numberOfLocPerClass;

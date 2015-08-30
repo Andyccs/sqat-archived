@@ -27,9 +27,12 @@ class DetectingMethods {
     public void findSurroundingMethods(String fileName) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<>();
-        StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
+        StandardJavaFileManager fileManager =
+                compiler.getStandardFileManager(diagnosticsCollector, null, null);
+
         Iterable<? extends JavaFileObject> fileObjects = fileManager.getJavaFileObjects(fileName);
-        CompilationTask task = compiler.getTask(null, fileManager, diagnosticsCollector, null, null, fileObjects);
+        CompilationTask task =
+                compiler.getTask(null, fileManager, diagnosticsCollector, null, null, fileObjects);
 
         // Here we switch to Sun-specific APIs
         JavacTask javacTask = (JavacTask) task;
@@ -44,7 +47,11 @@ class DetectingMethods {
             System.exit(0);
         }
         for (CompilationUnitTree compilationUnitTree : parseResult) {
-            compilationUnitTree.accept(new DetectingMethods.MethodLineLogger(compilationUnitTree, sourcePositions, fileName), null);
+            MethodLineLogger logger = new DetectingMethods.MethodLineLogger(
+                    compilationUnitTree,
+                    sourcePositions,
+                    fileName);
+            compilationUnitTree.accept(logger, null);
         }
     }
 
@@ -54,7 +61,10 @@ class DetectingMethods {
         private final LineMap lineMap;
         private String fileName;
 
-        private MethodLineLogger(CompilationUnitTree compilationUnitTree, SourcePositions sourcePositions, String fileName) {
+        private MethodLineLogger(
+                CompilationUnitTree compilationUnitTree,
+                SourcePositions sourcePositions,
+                String fileName) {
             this.compilationUnitTree = compilationUnitTree;
             this.sourcePositions = sourcePositions;
             this.lineMap = compilationUnitTree.getLineMap();
@@ -68,19 +78,20 @@ class DetectingMethods {
             endPosition = sourcePositions.getEndPosition(compilationUnitTree, arg0);
             endLine = lineMap.getLineNumber(endPosition);
 
-            System.out.println("Found the method " + arg0.getName() + " from line " + startLine + " to line " + endLine + ".");
+            System.out.printf(
+                    "Found the method %s from line %d to line %d.\n",
+                    arg0.getName(),
+                    startLine,
+                    endLine);
 
             // Avoid constructors
             if (!arg0.getName().toString().equalsIgnoreCase("<init>")) {
-                // TODO(andyccs): removed
                 NumberOfLOC numberOfLoc = new NumberOfLOC();
                 numberOfLoc.getLoC(fileName, startLine, endLine);
             }
 
             return super.visitMethod(arg0, arg1);
         }
-
-
     }
 }
 

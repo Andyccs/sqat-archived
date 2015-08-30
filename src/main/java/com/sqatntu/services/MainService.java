@@ -46,7 +46,6 @@ public class MainService {
         for (String path : filePathList) {
             File selectedFile = new File(path);
             fileList.add(selectedFile);
-
         }
 
         for (File file : fileList) {
@@ -60,32 +59,34 @@ public class MainService {
 
     private void AnalyzeFiles(File javaSourceFile) {
         try {
-
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
-            // The file manager locates your Java source file for the compiler. Null arguments indicate I am comfortable with its default behavior.
+            // The file manager locates your Java source file for the compiler.
+            // Null arguments indicate I am comfortable with its default behavior.
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+
             // These will be parsed by the compiler
-            Iterable<? extends JavaFileObject> fileObjects = fileManager.getJavaFileObjects(javaSourceFile);
+            Iterable<? extends JavaFileObject> fileObjects =
+                    fileManager.getJavaFileObjects(javaSourceFile);
 
             // Creates a new compilation task. This doesn't actually start the compilation process.
             // Null arguments indicate I am comfortable with its default behavior.
-            JavaCompiler.CompilationTask task = compiler.getTask(null, null, null, null, null, fileObjects);
+            JavaCompiler.CompilationTask task =
+                    compiler.getTask(null, null, null, null, null, fileObjects);
 
             // Cast to the Sun-specific CompilationTask.
-            com.sun.tools.javac.api.JavacTaskImpl javacTask = (com.sun.tools.javac.api.JavacTaskImpl) task;
+            com.sun.tools.javac.api.JavacTaskImpl javacTask =
+                    (com.sun.tools.javac.api.JavacTaskImpl) task;
             SourcePositions sourcePositions = Trees.instance(javacTask).getSourcePositions();
-            // The Sun-specific JavacTaskImpl can parse the source file without compiling it, returning
-            // one CompilationUnitTree for each JavaFileObject given to the compiler.getTask call (only one in our case).
+
+            // The Sun-specific JavacTaskImpl can parse the source file without compiling it,
+            // returning one CompilationUnitTree for each JavaFileObject given to the
+            // compiler.getTask call (only one in our case).
             Iterable<? extends CompilationUnitTree> trees = javacTask.parse();
             CompilationUnitTree tree = trees.iterator().next();
             tree.accept(new AnalyzeClassElement(tree, sourcePositions, javaSourceFile), null);
 
             // tree.accept(new NumberOfMethods(), null);
-            //////////////////////////
-
-            // displayInformation(javaSourceFile);
-
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }

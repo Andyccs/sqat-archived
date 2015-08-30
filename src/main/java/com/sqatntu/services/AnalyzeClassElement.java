@@ -13,6 +13,7 @@ public class AnalyzeClassElement extends BaseClass {
 
     public static int numberOfClasses = 0;
     public static int numberOfMethods = 0;
+
     private CompilationUnitTree compilationUnitTree;
     private SourcePositions sourcePositions;
     private LineMap lineMap;
@@ -20,7 +21,10 @@ public class AnalyzeClassElement extends BaseClass {
     private String className;
     private String methodName;
 
-    AnalyzeClassElement(CompilationUnitTree compilationUnitTree, SourcePositions sourcePositions, File fileName) {
+    public AnalyzeClassElement(
+            CompilationUnitTree compilationUnitTree,
+            SourcePositions sourcePositions,
+            File fileName) {
         this.compilationUnitTree = compilationUnitTree;
         this.sourcePositions = sourcePositions;
         this.lineMap = compilationUnitTree.getLineMap();
