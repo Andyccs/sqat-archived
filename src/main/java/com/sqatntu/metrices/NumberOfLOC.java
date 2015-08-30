@@ -29,7 +29,7 @@ public class NumberOfLOC extends BaseClass {
                 int i = 0;
                 String currentLine;
 
-                //Couting blank lines inside methods
+                //Counting blank lines inside methods
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
                     if ((i >= startLine) && (i <= endLine) && "".equals(currentLine.trim())) {
@@ -62,7 +62,7 @@ public class NumberOfLOC extends BaseClass {
 
                 String currentLine;
                 String nextLine;
-                // Couting blank lines inside methods
+                // Counting blank lines inside methods
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
 
@@ -113,7 +113,7 @@ public class NumberOfLOC extends BaseClass {
                 int i = 0;
                 String currentLine;
 
-                // Couting lines to detect starting position
+                // Counting lines to detect starting position
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     i++;
 

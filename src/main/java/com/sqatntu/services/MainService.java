@@ -23,7 +23,7 @@ public class MainService {
     public void AnalyzeJavaSourceCode(List<String> filePathList) {
         GetFileList(filePathList);
         System.out.println("");
-        for (SQATEntity entity : BaseClass.analizeList) {
+        for (SQATEntity entity : BaseClass.analyzeList) {
             if (!entity.getMethodName().equals("")) {
                 System.out.println(" Class Name - " + entity.getClassName());
                 classNames.add(entity.getClassName());

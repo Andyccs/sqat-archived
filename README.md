@@ -1,5 +1,5 @@
 # Software Quality Analysis Tool
-Software Quality Analysis Tool (com.sqatntu.SQAT) for my FYP
+Software Quality Analysis Tool (SQAT) for my Final Year Project
 
 # How To Build This Project
 After cloning this repository, open up build.gradle file. In this file, you need to make sure that the path to JDK_HOME

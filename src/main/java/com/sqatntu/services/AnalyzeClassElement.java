@@ -37,14 +37,14 @@ public class AnalyzeClassElement extends BaseClass {
         long endPosition = sourcePositions.getEndPosition(compilationUnitTree, classTree);
         long endLine = lineMap.getLineNumber(endPosition);
 
-        // TODO(andyccs: change method line of code to long
+        // TODO(andyccs): change method line of code to long
         SQATEntity classEntity = new SQATEntity();
         classEntity.setClassName(className);
         classEntity.setMethodLineOfCode((int) (endLine - startLine));
 
         numberOfClasses++;
 
-        analizeList.add(classEntity);
+        analyzeList.add(classEntity);
 
         return super.visitClass(classTree, p);
     }
@@ -66,7 +66,7 @@ public class AnalyzeClassElement extends BaseClass {
 
         numberOfMethods++;
 
-        analizeList.add(classEntity);
+        analyzeList.add(classEntity);
 
         return super.visitMethod(methodTree, p);
     }
